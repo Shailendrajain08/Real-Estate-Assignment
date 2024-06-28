@@ -1,4 +1,12 @@
 {
   "users": [
+    {
+      "id": "482f",
+      "name": "Shailendra Jain",
+      "userName": "shailendra0800",
+      "email": "shailendra.jain@gmail.com",
+      "password": "123456789",
+      "role": "user"
+    }
   ]
 }

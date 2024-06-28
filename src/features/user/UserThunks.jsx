@@ -1,5 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Signup, CheckEmailExists, CheckUserNameExists, Login } from '../services/UserApi';
+import { useNavigate } from 'react-router-dom';
+
+
+const navigate = useNavigate();
 
 export const SignupUser = createAsyncThunk(
   'user/signup',
@@ -29,7 +33,17 @@ export const LoginUser = createAsyncThunk(
       if (emailExists) {
         const response = await Login(credentials);
         if (response.data.length > 0) {
-          return response.data[0];
+          if(response.data[0].role === "admin"){
+            navigate('/admin');
+            return response.data[0];
+          } else if(response.data[0].role === "agent"){
+            navigate('/');
+            return response.data[0];
+          }
+          else if(response.data[0].role === "admin"){
+            return response.data[0]
+          }
+
         } else {
           return rejectWithValue('Invalid email or password');
         }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import { SignupUser } from "../../../features/user/UserThunks";
 
 const SignupForm = () => {
@@ -17,6 +18,7 @@ const SignupForm = () => {
   const dispatch = useDispatch();
   const { loading, error, userInfo } = useSelector((state) => state.user);
   const role = "user"
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -53,6 +55,10 @@ const SignupForm = () => {
       setConfirmPassword("");
     }
   }, [userInfo]);
+
+ const openLogin = () => {
+    navigate('/');
+  }
 
   return (
     <>
@@ -158,6 +164,7 @@ const SignupForm = () => {
               type="button"
               disabled={loading}
               className="w-6/12 py-2 text-white bg-red-600 rounded-md hover:bg-red-800 disabled:opacity-50"
+              onClick={openLogin}
             >
               Login
             </button>
